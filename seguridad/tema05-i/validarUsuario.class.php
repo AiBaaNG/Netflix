@@ -1,6 +1,5 @@
 <?php
 
-include "../../seguridad/tema05/funciones.php";
 //Recibimos el nombre de usuario
 verifyLogin();
 function getUsuario(){
@@ -42,7 +41,7 @@ function verifyLogin(){
     exit;
     }
     $canal->set_charset("utf8");
-    $consulta=$canal->prepare("select dni,nombre,clave from usuarios where dni=?");
+    $consulta=$canal->prepare("select * from usuarios where dni=?");
 
     if (!$consulta){
         echo "Ha ocurrido el error: ".mysqli_errno($canal)." ".mysqli_error($canal)."<br />";
@@ -52,7 +51,7 @@ function verifyLogin(){
     $consulta->bind_param("s",$uusuario);
     $uusuario=$usuario;
     $consulta->execute();
-    $consulta->bind_result($consulta,$usuarioBD,$nombreBD,$claveBD);
+    $consulta->bind_result($dniBD,$nombreBD,$claveBD);
     $consulta->store_result();
 
     //Comprobamos si el usuario existe
@@ -65,7 +64,6 @@ function verifyLogin(){
     //Cerramos la consulta
     $consulta->fetch();
     $canal->close();
-    unset($consulta);
 
     //Comprobamos que la contraseña sea correcta
     if (password_verify($clave, $claveBD)){
@@ -87,7 +85,7 @@ function verifyLogin(){
         
         
     }else{
-        header("Location: login.php?mensaje=".urlencode("Contraseña erronea."));
+        header("Location: login.php?mensaje=".urlencode("Contraseña errónea."));
     }
 
 
