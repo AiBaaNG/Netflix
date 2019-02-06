@@ -121,17 +121,18 @@ label{
 }
 
     </style>
-<script>
+
+    <script>
   function muestraMensaje(mensaje){
-    if (mensaje!=''){
-      alert(mensaje);
+    if (mensaje!=""){
+      alert("{$mensaje_s}"};
     }
   }
 </script>
+
 </head>
 
-
-<body onload="muestraMensaje({$mensaje_s});">
+<body onload="muestraMensaje({$mensaje_s})">
 <div class='login'>
 
   <div class='login-triangle'></div>
@@ -155,22 +156,6 @@ label{
 </div>
 
 
-
-{* <?php
-//Este es cuadno ha habido un error en validacion de datos
-if(isset($_GET["mensaje"])){
-  $mensaje=$_GET["mensaje"];
-  echo "<script>alert('$mensaje');</script>";   
-}
-            
-        
-                
-            
-                    
-           
-        
-        
-        ?> *}
 </body>
 
 </html>

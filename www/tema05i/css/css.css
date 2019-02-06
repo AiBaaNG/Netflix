@@ -1,0 +1,50 @@
+#mostrarCartelera{
+    border: 2px solid black;
+    margin: auto;
+    background-color: white;
+}
+h1{
+    text-align: center;
+}
+
+body {
+    /*background: rgb(37, 41, 47);*/
+    background-image: url("img-min.jpg");
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#ivanHub{
+    height: 50px;
+    align-content: center;
+}
+
+
+
+#cerrar{
+    background-color: white;
+   
+}
+
+#botonCerrar{
+    margin-right: 0px;
+}
+
+
+
+td{
+    margin-top: 0px;
+    width: 400px;
+    border-bottom: 3px solid black;
+}
+
+
+.tdImg{
+    width: 150px;
+}
+
+p{
+    font-size: 10px;
+
+}
+

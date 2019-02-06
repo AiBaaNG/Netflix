@@ -17,9 +17,6 @@ $smarty->template_dir="../../pantallas/tema05-i/templates/";
 $mensaje="";
 if (isset($_GET['mensaje'])){
 	$mensaje=trim(strip_tags($_GET['mensaje']));
-	
-}else{
-	$mensaje=2;
 }
 //Asigno la variable mensaje a mensaje_s para mostrarla posteriormente por smarty
 $smarty->assign('mensaje_s',$mensaje);

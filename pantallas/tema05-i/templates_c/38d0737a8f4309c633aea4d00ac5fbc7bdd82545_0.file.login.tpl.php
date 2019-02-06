@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-01-31 08:41:36
+/* Smarty version 3.1.33, created on 2019-02-06 00:22:56
   from 'C:\UwAmp\pantallas\tema05-i\templates\login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c52a6b0e2b329_18669742',
+  'unifunc' => 'content_5c5a1ad06da760_56988607',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38d0737a8f4309c633aea4d00ac5fbc7bdd82545' => 
     array (
       0 => 'C:\\UwAmp\\pantallas\\tema05-i\\templates\\login.tpl',
-      1 => 1548920496,
+      1 => 1549408968,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c52a6b0e2b329_18669742 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c5a1ad06da760_56988607 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
@@ -146,20 +146,22 @@ label{
 }
 
     </style>
-<?php echo '<script'; ?>
+
+    <?php echo '<script'; ?>
 >
   function muestraMensaje(mensaje){
-    if (mensaje!=''){
-      alert(mensaje);
+    if (mensaje!=""){
+      alert("<?php echo $_smarty_tpl->tpl_vars['mensaje_s']->value;?>
+"};
     }
   }
 <?php echo '</script'; ?>
 >
+
 </head>
 
-
 <body onload="muestraMensaje(<?php echo $_smarty_tpl->tpl_vars['mensaje_s']->value;?>
-);">
+)">
 <div class='login'>
 
   <div class='login-triangle'></div>
@@ -181,7 +183,6 @@ label{
   </div>
   
 </div>
-
 
 
 </body>

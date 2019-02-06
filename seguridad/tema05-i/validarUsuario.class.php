@@ -1,6 +1,7 @@
 <?php
 
-//Recibimos el nombre de usuario
+include_once("Sesion.class.php");
+Sesion::start();
 verifyLogin();
 function getUsuario(){
     $usuario="";
@@ -67,18 +68,7 @@ function verifyLogin(){
 
     //Comprobamos que la contraseña sea correcta
     if (password_verify($clave, $claveBD)){
-        
-        //Creamos sesion
-        session_name("SESION");
-        session_cache_limiter('nocache');
-        session_start();
-
-        //Datos básicos del usuario (secretos)
-        $_SESSION['validado']=true;
-        $_SESSION['usuario']=$usuario;
-        $_SESSION['cuota']=$cuotaBD;		
-
-
+        Sesion::validarUsuario($nombreBD,$dniBD);
         header("Location: index.php?mensaje=".urlencode("Login correcto."));
         
         
