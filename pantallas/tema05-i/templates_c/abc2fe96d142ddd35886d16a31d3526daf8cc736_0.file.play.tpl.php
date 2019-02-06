@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-02-06 10:16:58
+  from 'C:\UwAmp\pantallas\tema05-i\templates\play.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5c5aa60ad92bb9_51336977',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'abc2fe96d142ddd35886d16a31d3526daf8cc736' => 
+    array (
+      0 => 'C:\\UwAmp\\pantallas\\tema05-i\\templates\\play.tpl',
+      1 => 1549444614,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5c5aa60ad92bb9_51336977 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -51,15 +74,20 @@
     <div id="cerrar">
 					<a href='logout.php' id="botonCerrar">Cerrar Sesión</a>
 				</div>
-    <h1>{$datosVideoS.titulo}</h1>
+    <h1><?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['titulo'];?>
+</h1>
     <div id="padre">
     <div id="infoPeli">
         
         <br />
-        <img src="carteles/{$datosVideoS.cartel}" alt="{$datosVideoS.titulo}" width="200px;" id="imagen">
-            <p id="sinopsis">{$datosVideoS.sinopsis}</p>
+        <img src="carteles/<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['cartel'];?>
+" alt="<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['titulo'];?>
+" width="200px;" id="imagen">
+            <p id="sinopsis"><?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['sinopsis'];?>
+</p>
             <button>
-                <a href="player.php?v={$datosVideoS.video}">Ver Película</a>
+                <a href="player.php?v=<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['video'];?>
+">Ver Película</a>
             </button>
     
         
@@ -69,4 +97,5 @@
 
     
 </body>
-</html>
+</html><?php }
+}

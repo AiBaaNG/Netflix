@@ -23,28 +23,7 @@ require_once("../../seguridad/tema05-i/sesionesbd.class.php");
             }
             
 	    }
-		//Funcion para devolver los datos del video que reproduciremos
-		public function getDatosV($codigo) {
-
-            $canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
-            if ($canal->connect_errno){
-                die("Error de conexión con la base de datos ");
-            }
-            $canal->set_charset("utf8");
-            $consulta=$canal->prepare("select * from videos where codigo=?");
-            $consulta->bind_param("s",$cod);
-            $cod = $codigo;
-            $consulta->execute();
-            $resultado = $consulta->get_result();
-			$avideo = $resultado->fetch_assoc();
-			$consulta->close();
-            return $avideo;
-
-
-
-
-
-		}
+		
 	    
 	}
 ?>

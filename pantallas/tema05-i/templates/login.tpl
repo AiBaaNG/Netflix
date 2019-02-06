@@ -125,14 +125,14 @@ label{
     <script>
   function muestraMensaje(mensaje){
     if (mensaje!=""){
-      alert("{$mensaje_s}"};
+      alert(mensaje);
     }
   }
 </script>
 
 </head>
 
-<body onload="muestraMensaje({$mensaje_s})">
+<body onload="muestraMensaje('{$mensaje_s}')">
 <div class='login'>
 
   <div class='login-triangle'></div>

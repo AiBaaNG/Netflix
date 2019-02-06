@@ -1,6 +1,6 @@
  <?php
 require_once("Video.class.php");
-require_once("AccesoVideos.class.php");
+require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
 require_once("Pantalla.class.php");
 require_once("../../seguridad/tema05-i/Sesion.class.php");
 
@@ -26,7 +26,7 @@ if (isset($_GET['mensaje'])){
 
 // Recuperar datos que se muestran en la pantalla
 $bd=new AccesoVideos();
-$videos=$bd->getVideos();
+$videos=$bd->getVideos($_SESSION['dni']);
 
 //Mostrar pantalla con los datos
 

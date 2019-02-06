@@ -1,16 +1,18 @@
 <?php
     include_once( '../../Smarty/libs/Smarty.class.php' );
     require_once("Video.class.php");
-    require_once("AccesoVideos.class.php");
+    require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
     require_once("Pantalla.class.php");
     require_once("../../seguridad/tema05-i/Sesion.class.php");
     require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
+    require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
     
     
     
     
     //Crear smarty
     $smarty = new Smarty();
+    date_default_timezone_set('Europe/Madrid');
     $smarty->config_dir="../../pantallas/tema05-i/configs/";
     $smarty->cache_dir="../../pantallas/tema05-i/cache/";
     $smarty->compile_dir="../../pantallas/tema05-i/templates_c/";
@@ -25,9 +27,7 @@
             exit;
     }
 
-    /**
-     * En caso de que no este el parametro codigo, o este este vacio, vuelve al login.
-     */
+    //Recibo el codigo enviado al hacer click en la pelicula para después usarlo para hacer consultas en la base de datos.
     if(!isset($_GET['codigo']) && empty($_GET['codigo'])) {
         header("Location: index.php");
         exit;
@@ -39,20 +39,21 @@
     $ra = new ReproductorAutorizado();
     $autorizado = $ra->autorizado($codigo, $_SESSION['dni']);
    
-    //Si el usuario no está autorizado vuelve al menu principal
+    //Si el usuario no está autorizado vuelve al menu principal.
     if($autorizado == false) {
         header("Location: index.php?mensaje=".urlencode("Usuario no autorizado para reproducir este vídeo."));
         exit;
     }
-
-    echo "<script>alert('Si que puede visualizar');</script>";
+    $videos = new AccesoVideos();
 
     //Reproducir video
-    $datosVideo = $ra->getDatosV($codigo);
-    //Funcion por hacer
-    $enlace = crearLinkVideo($codigo_peli);
-    $ra->close();
+    //Cojo los datos del video para posteriormente mostrarlos y poder reproducirlo.
+    $datosVideo = $videos->getDatosV($codigo);
+    // TODO: Funcion por hacer
     $smarty->assign('datosVideoS', $datosVideo);
-    $smarty->assign('enlaceS', $enlace);
-    $smarty->display('play.tpl');;
+    $smarty->display('play.tpl');
+    
+
+
+
 ?>

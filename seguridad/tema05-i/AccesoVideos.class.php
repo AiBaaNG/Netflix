@@ -1,5 +1,5 @@
 <?php 
-require_once("../../seguridad/tema05-i/sesionesbd.class.php");
+require_once("sesionesbd.class.php");
 class AccesoVideos {
 	
 	public function getVideo($codigo){
@@ -8,7 +8,7 @@ class AccesoVideos {
 			die("Error de conexión con la base de datos ");
 		}
 		$canal->set_charset("utf8");
-		$consulta=$canal->prepare("select * from videos where codigo=?");
+		$consulta=$canal->prepare("select * from videos where codigo=? order by titulo");
 		$consulta->bind_param("s",$cod);
 		$cod=$codigo;
 		$consulta->execute();
@@ -24,14 +24,17 @@ class AccesoVideos {
 		return new Foto($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
 	}
 	
-	public function getVideos(){
+	public function getVideos($dni){
 		$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
 		if ($canal->connect_errno){
 			die("Error de conexión con la base de datos ".$canal->connect_error);
 		}
 		$canal->set_charset("utf8");
 		
-		$consulta=$canal->prepare("select * from videos");
+		$consulta=$canal->prepare("select * from videos where codigo_perfil in (select codigo_perfil from perfil_usuario where dni=?) order by titulo
+		");
+		$consulta->bind_param("s",$ddni);
+		$ddni=$dni;
 		$consulta->execute();
 		$consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
 		$videos=array();
@@ -42,63 +45,26 @@ class AccesoVideos {
 		return $videos;
 	}
 	
-	// public function crearCompra($numeroCompra,$nif,$nombre,$direccion,$fotos){
-	// 	$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
-	// 	if ($canal->connect_errno){
-	// 		die("Error de conexión con la base de datos");
-	// 	}
-	// 	$canal->set_charset("utf8");
-		
-	// 	$canal->autocommit(false);
-	// 	//elimina pedido por si ya existía
-	// 	$sql="delete from ventas where identificacion=?";
-	// 	if (!$consulta=$canal->prepare($sql)){
-	// 		die ("sentencia errónea ".$canal->error);
-	// 	}
-	// 	$consulta->bind_param("s",$numeroC);
-	// 	$numeroC=$numeroCompra;
-	// 	if (!$consulta->execute()){
-	// 		die("Error en la base de datos");
-	// 	}
-	// 	$consulta->close();
-	// 	unset($consulta);
-	// 	unset($nnumeroCompra);	
-			
-	// 	//graba el pedido
-		
-	// 	$sql="insert into ventas (identificacion, nif, nombre, direccion) values (?,?,?,?)";
-	// 	$consulta=$canal->prepare($sql);
-	// 	$consulta->bind_param("ssss",$nnumeroCompra,$nnif,$nnombre,$ddireccion);
-	// 	$nnumeroCompra=$numeroCompra;
-	// 	$nnif=$nif;
-	// 	$nnombre=$nombre;
-	// 	$ddireccion=$direccion;
-	// 	if (!$consulta->execute()){
-	// 		$canal->rollback();
-	// 		die("Error en la base de datos ");
-	// 	}
-	// 	$consulta->close();
-		
-	// 	unset($consulta);
-	// 	$consulta=$canal->prepare("insert into lineas values (?,?)");
-	// 	$consulta->bind_param("ss",$nnumeroCompra,$ccodigo);
-	// 	$nnumeroCompra=$numeroCompra;
-	// 	foreach($fotos as $afoto){
-	// 		$ccodigo=$afoto->codigo;
-	// 		if(!$consulta->execute()){
-	// 			$canal->rollback();
-	// 			die("Error en la base de datos 2");
-	// 		}
-	// 	}
-	// 	$consulta->close();
-	// 	unset($consulta);
-	// 	if (!$canal->commit()){
-	// 		$canal->rollback();
-	// 		die("Operación no completada");
-	// 	}
-	// 	$canal->close();
-	// }
-	
+	//Funcion para devolver los datos del video que reproduciremos
+	public function getDatosV($codigo) {
+
+		$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
+		if ($canal->connect_errno){
+			die("Error de conexión con la base de datos ");
+		}
+		$canal->set_charset("utf8");
+		$consulta=$canal->prepare("select * from videos where codigo=?");
+		$consulta->bind_param("s",$cod);
+		$cod = $codigo;
+		$consulta->execute();
+		$resultado = $consulta->get_result();
+		$avideo = $resultado->fetch_assoc();
+		$consulta->close();
+		return $avideo;
+
+
+
+	}
 	
 }
 ?>
