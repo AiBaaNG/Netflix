@@ -5,7 +5,6 @@
     require_once("Pantalla.class.php");
     require_once("../../seguridad/tema05-i/Sesion.class.php");
     require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
-    require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
     
     
     

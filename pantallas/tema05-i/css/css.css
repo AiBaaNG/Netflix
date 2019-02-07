@@ -1,0 +1,20 @@
+#mostrarCartelera{
+    border: 2px solid black;
+    margin: auto;
+    background-color: white;
+}
+h1{
+    text-align: center;
+}
+
+body {
+    /*background: rgb(37, 41, 47);*/
+    background-image: url("img-min.jpg");
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #ivanHub{
+      height: 50px;
+      align-content: center;
+  }

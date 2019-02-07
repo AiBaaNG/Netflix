@@ -1,6 +1,6 @@
 <?php
     require_once("../../seguridad/tema05-i/VideoStream.class.php");
-    $enc_link = strip_tags(trim($_GET['v']));
+    $enlace = strip_tags(trim($_GET['v']));
 
     /**
      * Comprueba que el random que se le ha pasado por los datos es el mismo que 
@@ -9,7 +9,7 @@
      * la id de sesion estas jodido igual.)
      */
 
-    $ruta_video = '../../videos/videos/' . $enc_link;
+    $ruta_video = '../../videos/videos/' . $enlace;
 
     $stream = new VideoStream($ruta_video);
     $stream->start();
