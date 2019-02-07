@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-07 09:13:01
+/* Smarty version 3.1.33, created on 2019-02-07 23:05:02
   from 'C:\UwAmp\pantallas\tema05-i\templates\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c5be88ddd5786_97553933',
+  'unifunc' => 'content_5c5cab8eb4e550_90567290',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c754bfdd0d7e6cfe9aed7e0d3a2104c863aef211' => 
     array (
       0 => 'C:\\UwAmp\\pantallas\\tema05-i\\templates\\index.tpl',
-      1 => 1549527180,
+      1 => 1549577101,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c5be88ddd5786_97553933 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c5cab8eb4e550_90567290 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="es">
 <head>
@@ -46,6 +46,10 @@ function content_5c5be88ddd5786_97553933 (Smarty_Internal_Template $_smarty_tpl)
 	h1, h2{
 		color: black;
 
+	}
+
+	#categorias{
+		color: white;
 	}
 	#logo{
         display: flex;
@@ -169,7 +173,7 @@ function content_5c5be88ddd5786_97553933 (Smarty_Internal_Template $_smarty_tpl)
 					
 
 					
-					<h2>Filtrar por categorías</h2>
+					<h2 id="categorias">Filtrar por categorías</h2>
 					<div id="filtrar">
 						<form action="index.php?" method="post">
 							<div id="mainselection" >
@@ -208,13 +212,34 @@ foreach ($_from as $_smarty_tpl->tpl_vars['avideo']->value) {
 					<div class="flota">
 					<tr>
 					
-					<td class="tdImg"><img src="carteles/<?php echo $_smarty_tpl->tpl_vars['avideo']->value->cartel;?>
-" alt="<?php echo $_smarty_tpl->tpl_vars['avideo']->value->titulo;?>
-" height="200" width="150" /></td>
 					
+					
+					<td class="tdImg">
+						<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['pelisVistas']->value, 'visto');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['visto']->value) {
+?>
+	                       <?php if ($_smarty_tpl->tpl_vars['avideo']->value->codigo == $_smarty_tpl->tpl_vars['visto']->value) {?>
+	                        	<img src="carteles/visto.png" alt="visto" height="20" width="30" />	
+	                        <?php }?>
+
+
+	                	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+						<img src="carteles/<?php echo $_smarty_tpl->tpl_vars['avideo']->value->cartel;?>
+" alt="<?php echo $_smarty_tpl->tpl_vars['avideo']->value->titulo;?>
+" height="200" width="150" />
+						
+						
+					</td>
 					<td id="titulo">
+						
 						<h2><?php echo $_smarty_tpl->tpl_vars['avideo']->value->titulo;?>
 </h2>
+						
 						<p class="sinospsis"><?php echo $_smarty_tpl->tpl_vars['avideo']->value->sinopsis;?>
 </p>
 						<h2><a href="play.php?codigo=<?php echo $_smarty_tpl->tpl_vars['avideo']->value->codigo;?>

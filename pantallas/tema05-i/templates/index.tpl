@@ -22,6 +22,10 @@
 		color: black;
 
 	}
+
+	#categorias{
+		color: white;
+	}
 	#logo{
         display: flex;
         justify-content: center;
@@ -143,7 +147,7 @@
 					
 
 					
-					<h2>Filtrar por categorías</h2>
+					<h2 id="categorias">Filtrar por categorías</h2>
 					<div id="filtrar">
 						<form action="index.php?" method="post">
 							<div id="mainselection" >
@@ -178,10 +182,24 @@
 					<div class="flota">
 					<tr>
 					
-					<td class="tdImg"><img src="carteles/{$avideo->cartel}" alt="{$avideo->titulo}" height="200" width="150" /></td>
 					
+					
+					<td class="tdImg">
+						{foreach from=$pelisVistas item=visto}
+	                       {if $avideo->codigo == $visto}
+	                        	<img src="carteles/visto.png" alt="visto" height="20" width="30" />	
+	                        {/if}
+
+
+	                	{/foreach}
+						<img src="carteles/{$avideo->cartel}" alt="{$avideo->titulo}" height="200" width="150" />
+						
+						
+					</td>
 					<td id="titulo">
+						
 						<h2>{$avideo->titulo}</h2>
+						
 						<p class="sinospsis">{$avideo->sinopsis}</p>
 						<h2><a href="play.php?codigo={$avideo->codigo}">Ver Película</a></h2>
 					</td>

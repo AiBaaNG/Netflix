@@ -1,8 +1,8 @@
 <?php
     include_once( '../../Smarty/libs/Smarty.class.php' );
-    require_once("Video.class.php");
+    require_once("../../seguridad/tema05-i/Video.class.php");
     require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
-    require_once("Pantalla.class.php");
+    require_once("../../seguridad/tema05-i/Pantalla.class.php");
     require_once("../../seguridad/tema05-i/Sesion.class.php");
     require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
     

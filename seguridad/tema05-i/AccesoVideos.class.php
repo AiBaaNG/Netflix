@@ -2,29 +2,6 @@
 require_once("sesionesbd.class.php");
 require_once("Video.class.php");
 class AccesoVideos {
-	
-	// public function getVideo($codigo){
-	// 	$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
-	// 	if ($canal->connect_errno){
-	// 		die("Error de conexión con la base de datos ");
-	// 	}
-	// 	$canal->set_charset("utf8");
-	// 	$consulta=$canal->prepare("select * from videos where codigo=? order by titulo");
-	// 	$consulta->bind_param("s",$cod);
-	// 	$cod=$codigo;
-	// 	$consulta->execute();
-	// 	$consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
-	// 	$consulta->store_result();
-		
-	// 	if ($consulta->num_rows!=1){
-	// 		$canal->close();
-	// 		return null;
-	// 	}
-	// 	$consulta->fetch();
-	// 	$canal->close();
-	// 	return new Foto($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
-	// }
-	
 	//Funcion para devolver los datos de los videos para mostrarlos, le paso DNi para mostrar solo los que puede ver x usuario
 	public function getVideos($dni, $orden){
 		//Cuando el orden es alfabético hace un order by titulo
@@ -124,29 +101,57 @@ class AccesoVideos {
 			$canal->close();
 			return $videos;
 	}
+
+	//Funcion comprobar si un video ha sido vistp
 	
 	function haSidoVisto($dni){
+		$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
+		if ($canal->connect_errno){
+			die("Error de conexión con la base de datos ".$canal->connect_error);
+		}
+		$canal->set_charset("utf8");
 		// Consulta para marcar vídeos como "vistos"
+		$videosVistos = [];
 		$consulta = $canal->prepare("select codigo_video from visionado where dni = ?");
-		$consulta->bind_param("s", $dni1);
-		$dni1 = $usuario->dni;
+		$consulta->bind_param("s", $ddni);
+		$ddni = $dni;
 		$consulta->execute();
 		$consulta->bind_result($codigo_video);
 		while ($consulta->fetch()) {
-			array_push($vistos, $codigo_video);
+			array_push($videosVistos, $codigo_video);
 		}
+		return $videosVistos;
 	}
 	//Funcion para marcar el video como visto
-	function marcarVisto($dni,$codigo_video,$sinopsis){
-		$consulta = $canal->prepare("insert into visionado values (null, ?, ?, current_timestamp, ?)");
-		$consulta->bind_param("sss", $dni2, $codigo_video2, $sinopsis2);
-		$dni2 = $usuario->dni;
-		$codigo_video2 = $codigo;
-		$sinopsis2 = $sinopsis;
+	function marcarVisto($dni,$codigo_video){
+		$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
+			if ($canal->connect_errno){
+				die("Error de conexión con la base de datos ");
+			}
+		$canal->set_charset("utf8");
+		$consulta = $canal->prepare("select * from visionado where dni = ? and codigo_video = ?");
+		$consulta->bind_param("ss", $dni1, $codigo_video1);
+		$dni1 = $dni;
+		$codigo_video1 = $codigo_video;
 		$consulta->execute();
-		$consulta->close();
+		$consulta->store_result();
+		if ($consulta->num_rows() < 1) {
+			$consulta->close();
+			$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
+			if ($canal->connect_errno){
+				die("Error de conexión con la base de datos ");
+			}
+			$canal->set_charset("utf8");
+			$consulta = $canal->prepare("insert into visionado values (null, ?, ?, current_timestamp, null)");
+			$consulta->bind_param("ss", $ddni, $ccodigo_video);
+			$ddni = $dni;
+			$ccodigo_video = $codigo_video;
+			$consulta->execute();
+			$consulta->close();
+		}
 	}
 
+	
 
 
 

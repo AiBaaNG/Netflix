@@ -1,7 +1,7 @@
  <?php
-require_once("Video.class.php");
+require_once("../../seguridad/tema05-i/Video.class.php");
 require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
-require_once("Pantalla.class.php");
+require_once("../../seguridad/tema05-i/Pantalla.class.php");
 require_once("../../seguridad/tema05-i/Sesion.class.php");
 
 
@@ -45,14 +45,14 @@ if(isset($_GET['v'])){
 	$videos=$bd->getVideos($_SESSION['dni'],$mostrar);
 	$parametros=array('avideos' => $videos,'mensaje'=>$mensaje);
 	$smarty->assign('datosVideoS', $parametros);
-	$smarty->display('index.tpl');
+	
 }else if(isset($_POST['submit'])){
 	foreach ($_POST['categorias'] as $select){
 		$mostrar = $select;
 		$videos=$bd->getVideosByCategory($_SESSION['dni'],$mostrar);
 		$parametros=array('avideos' => $videos,'mensaje'=>$mensaje);
 		$smarty->assign('datosVideoS', $parametros);
-		$smarty->display('index.tpl');
+		
 	}
 		
 }else{
@@ -61,13 +61,18 @@ if(isset($_GET['v'])){
 	$videos=$bd->getVideos($_SESSION['dni'],$mostrar);
 	$parametros=array('avideos' => $videos,'mensaje'=>$mensaje);
 	$smarty->assign('datosVideoS', $parametros);
-	$smarty->display('index.tpl');
+	
 }
 
 
 
-//Crear array de peliculas vistas 
+//Crear array de peliculas  
 $pelisVistas  = array();
+$pelisVistas=$bd->haSidoVisto($_SESSION['dni']);
+$smarty->assign('pelisVistas', $pelisVistas);
+$smarty->display('index.tpl');
+
+
 
 // echo "<script>alert('$mostrar');</script>";
 

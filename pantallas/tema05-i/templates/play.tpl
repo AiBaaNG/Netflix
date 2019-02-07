@@ -154,7 +154,7 @@
         <img src="carteles/{$datosVideoS.cartel}" alt="{$datosVideoS.titulo}" width="200px;" id="imagen">
             <p id="sinopsis">{$datosVideoS.sinopsis}</p>
             <button>
-                <a href="player.php?v={$datosVideoS.video}">Ver Película</a>
+                <a href="player.php?v={$datosVideoS.video}&c={$datosVideoS.codigo}">Ver Película</a>
             </button>
             {if $datosVideoS.descargable == 'S'}
                 <div class="descargar">
