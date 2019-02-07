@@ -12,11 +12,14 @@
   }
 </script>
 <style type="text/css">
+	#titulo{
+		color: white;
+	}
 	body{
 		background-image: url(css/img-min-dark.jpg);
 	}
 	h1, h2{
-		color: white;
+		color: black;
 
 	}
 	#logo{
@@ -33,6 +36,10 @@
     	text-decoration: none;
     	color: black;
     }
+
+	p{
+	color: black;
+	}
 
 
 	/*Boton cerrar*/
@@ -165,7 +172,7 @@
 			<div id="logo">
 		        <img id="ivanHub" src="css/captura.png" class="login-header" />
 		    </div>
-			<h1>LISTA DE PELICULAS</h1>
+			<h1 id="titulo">LISTA DE PELICULAS</h1>
 			<table id="mostrarCartelera">
 				{foreach from=$datosVideoS.avideos item=avideo}
 					<div class="flota">
@@ -175,7 +182,7 @@
 					
 					<td id="titulo">
 						<h2>{$avideo->titulo}</h2>
-						<p>{$avideo->sinopsis}</p>
+						<p class="sinospsis">{$avideo->sinopsis}</p>
 						<h2><a href="play.php?codigo={$avideo->codigo}">Ver Película</a></h2>
 					</td>
 					</tr>

@@ -100,41 +100,52 @@ class AccesoVideos {
 
 	//Funcion para sacar los videos por categoria
 	function getVideosByCategory($usuario, $tematica){
+		//Consulta javier
+		// SELECT * from videos v, perfil_usuario p, usuarios u, tematica t, asociado a where u.dni = '11111111A' and p.dni = u.dni and p.codigo_perfil = v.codigo_perfil AND t.descripcion = 'ACCIÓN' and t.codigo = a.codigo_tematica and a.codigo_video = v.codigo
+
+
+
 		$canal=new mysqli(sesionesbd::IP, sesionesbd::USUARIO, sesionesbd::CLAVE, sesionesbd::BD);
-		if ($canal->connect_errno){
-			die("Error de conexión con la base de datos ".$canal->connect_error);
+			if ($canal->connect_errno){
+				die("Error de conexión con la base de datos ".$canal->connect_error);
+			}
+			$canal->set_charset("utf8");
+			
+			$consulta=$canal->prepare("SELECT v.codigo, v.titulo, v.cartel, v.descargable, v.codigo_perfil, v.sinopsis, v.video from videos v, perfil_usuario p, usuarios u, tematica t, asociado a where u.dni=? and p.dni = u.dni and p.codigo_perfil = v.codigo_perfil AND t.descripcion =? and t.codigo = a.codigo_tematica and a.codigo_video = v.codigo");
+			$consulta->bind_param("ss",$ddni,$ttematica);
+			$ddni=$usuario;
+			$ttematica = $tematica;
+			$consulta->execute();
+			$consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
+			$videos=array();
+			while ($consulta->fetch()){
+				array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
+			}
+			$canal->close();
+			return $videos;
+	}
+	
+	function haSidoVisto($dni){
+		// Consulta para marcar vídeos como "vistos"
+		$consulta = $canal->prepare("select codigo_video from visionado where dni = ?");
+		$consulta->bind_param("s", $dni1);
+		$dni1 = $usuario->dni;
+		$consulta->execute();
+		$consulta->bind_result($codigo_video);
+		while ($consulta->fetch()) {
+			array_push($vistos, $codigo_video);
 		}
-		$canal->set_charset("utf8");
-        $end = array();
-        $consulta = $canal->prepare( 'select codigo_perfil from perfil_usuario where dni=?' );
-        $consulta->bind_param('s', $usuario);
-        $consulta->bind_result($count);
-        $consulta->execute();
-        while ($consulta->fetch()) {
-            array_push($end, $count);
-        }
-        $consulta->close();
- 
-        $v = array();
-        foreach ($end as $key => $value) {
-            $consulta2 = $canal->prepare( 'select * from videos where codigo in (select codigo_video from asociado where codigo_tematica in (select codigo from tematica where descripcion=?)) and codigo_perfil=?' );
-            $consulta2->bind_param('ss', $tematica, $value);
-            $consulta2->execute();
-            $res = $consulta2->get_result();
-            $video = $res->fetch_assoc();
-            $consulta2->close();
-            array_push($v, $video);
-        }
- 
-        $fin = array();
-        foreach ($v as $key => $value) {
-            if(!empty($key)) {
-                array_push($fin,new Video($value['codigo'], $value['titulo'], $value['cartel'], $value['descargable'], $value['codigo_perfil'], $value['sinopsis'], $value['video']));
-            }
-        }
- 
-        return $fin;
-    }
+	}
+	//Funcion para marcar el video como visto
+	function marcarVisto($dni,$codigo_video,$sinopsis){
+		$consulta = $canal->prepare("insert into visionado values (null, ?, ?, current_timestamp, ?)");
+		$consulta->bind_param("sss", $dni2, $codigo_video2, $sinopsis2);
+		$dni2 = $usuario->dni;
+		$codigo_video2 = $codigo;
+		$sinopsis2 = $sinopsis;
+		$consulta->execute();
+		$consulta->close();
+	}
 
 
 

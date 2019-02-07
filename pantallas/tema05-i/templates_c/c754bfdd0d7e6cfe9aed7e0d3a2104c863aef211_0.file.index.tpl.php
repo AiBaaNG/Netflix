@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-07 01:45:43
+/* Smarty version 3.1.33, created on 2019-02-07 09:13:01
   from 'C:\UwAmp\pantallas\tema05-i\templates\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c5b7fb7e42912_81284176',
+  'unifunc' => 'content_5c5be88ddd5786_97553933',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c754bfdd0d7e6cfe9aed7e0d3a2104c863aef211' => 
     array (
       0 => 'C:\\UwAmp\\pantallas\\tema05-i\\templates\\index.tpl',
-      1 => 1549500342,
+      1 => 1549527180,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c5b7fb7e42912_81284176 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c5be88ddd5786_97553933 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="es">
 <head>
@@ -37,11 +37,14 @@ function content_5c5b7fb7e42912_81284176 (Smarty_Internal_Template $_smarty_tpl)
 <?php echo '</script'; ?>
 >
 <style type="text/css">
+	#titulo{
+		color: white;
+	}
 	body{
 		background-image: url(css/img-min-dark.jpg);
 	}
 	h1, h2{
-		color: white;
+		color: black;
 
 	}
 	#logo{
@@ -58,6 +61,10 @@ function content_5c5b7fb7e42912_81284176 (Smarty_Internal_Template $_smarty_tpl)
     	text-decoration: none;
     	color: black;
     }
+
+	p{
+	color: black;
+	}
 
 
 	/*Boton cerrar*/
@@ -191,7 +198,7 @@ function content_5c5b7fb7e42912_81284176 (Smarty_Internal_Template $_smarty_tpl)
 			<div id="logo">
 		        <img id="ivanHub" src="css/captura.png" class="login-header" />
 		    </div>
-			<h1>LISTA DE PELICULAS</h1>
+			<h1 id="titulo">LISTA DE PELICULAS</h1>
 			<table id="mostrarCartelera">
 				<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['datosVideoS']->value['avideos'], 'avideo');
@@ -208,7 +215,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['avideo']->value) {
 					<td id="titulo">
 						<h2><?php echo $_smarty_tpl->tpl_vars['avideo']->value->titulo;?>
 </h2>
-						<p><?php echo $_smarty_tpl->tpl_vars['avideo']->value->sinopsis;?>
+						<p class="sinospsis"><?php echo $_smarty_tpl->tpl_vars['avideo']->value->sinopsis;?>
 </p>
 						<h2><a href="play.php?codigo=<?php echo $_smarty_tpl->tpl_vars['avideo']->value->codigo;?>
 ">Ver Película</a></h2>

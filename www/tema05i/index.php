@@ -64,6 +64,11 @@ if(isset($_GET['v'])){
 	$smarty->display('index.tpl');
 }
 
+
+
+//Crear array de peliculas vistas 
+$pelisVistas  = array();
+
 // echo "<script>alert('$mostrar');</script>";
 
 // Recuperar datos que se muestran en la pantalla

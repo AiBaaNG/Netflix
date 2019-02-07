@@ -18,6 +18,7 @@ class Video {
 		$this->video=$video;
 	}
 
+
 	public function __get($atributo){
 		
 		if (isset($this->$atributo)){
