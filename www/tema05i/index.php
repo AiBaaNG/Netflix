@@ -66,26 +66,13 @@ if(isset($_GET['v'])){
 
 
 
-//Crear array de peliculas  
+//Crear array de peliculas  y las asigno a smarty 
 $pelisVistas  = array();
 $pelisVistas=$bd->haSidoVisto($_SESSION['dni']);
 $smarty->assign('pelisVistas', $pelisVistas);
 $smarty->display('index.tpl');
 
 
-
-// echo "<script>alert('$mostrar');</script>";
-
-// Recuperar datos que se muestran en la pantalla
-
-
-// $parametros=array('avideos' => $videos,'mensaje'=>$mensaje);
-// $smarty->assign('datosVideoS', $parametros);
-// $smarty->display('index.tpl');
-
-//Mostrar pantalla con los datos
-
-// $carrito=new Carrito($_SESSION['variable']);
 
 
 

@@ -25,16 +25,8 @@
         header("Location: login.php?mensaje=".urlencode("Usuario inexistente o clave no reconocida"));
             exit;
     }
-
-    //Recibo el codigo enviado al hacer click en la pelicula para después usarlo para hacer consultas en la base de datos.
-    if(!isset($_GET['codigo']) && empty($_GET['codigo'])) {
-        header("Location: index.php");
-        exit;
-    }
+    //COmpruebo si el usuario tiene autorizaccion para ver la pelicula  
     $codigo = strip_tags(trim($_GET['codigo']));
-
-
-
     $ra = new ReproductorAutorizado();
     $autorizado = $ra->autorizado($codigo, $_SESSION['dni']);
    
@@ -43,6 +35,17 @@
         header("Location: index.php?mensaje=".urlencode("Usuario no autorizado para reproducir este vídeo."));
         exit;
     }
+
+    //Recibo el codigo enviado al hacer click en la pelicula para después usarlo para hacer consultas en la base de datos.
+    if(!isset($_GET['codigo']) && empty($_GET['codigo'])) {
+        header("Location: index.php");
+        exit;
+    }
+    
+
+
+
+    
     $videos = new AccesoVideos();
 
     //Reproducir video

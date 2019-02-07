@@ -13,6 +13,4 @@ if(!Sesion::validado()){
 }
 
 
-
-
 ?>

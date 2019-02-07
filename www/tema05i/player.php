@@ -13,6 +13,16 @@
         header("Location: login.php?mensaje=".urlencode("Usuario inexistente o clave no reconocida"));
             exit;
     }
+    //COmpruebo si el usuario tiene autorizaccion para ver la pelicula
+    $ra = new ReproductorAutorizado();
+    $autorizado = $ra->autorizado($codigo, $_SESSION['dni']);
+   
+    //Si el usuario no está autorizado vuelve al menu principal.
+    if($autorizado == false) {
+        header("Location: index.php?mensaje=".urlencode("Usuario no autorizado para reproducir este vídeo."));
+        exit;
+    }
+
     //Marco el video como visto
     $bd=new AccesoVideos();
     $bd->marcarVisto($_SESSION['dni'],$codigo);

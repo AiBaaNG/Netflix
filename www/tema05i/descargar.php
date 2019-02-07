@@ -12,6 +12,18 @@ require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
         header("Location: login.php?mensaje=".urlencode("Usuario inexistente o clave no reconocida"));
             exit;
     }
+    //Compruebo si el usuario esstá autorizado para descargar la pelicula
+    $ra = new ReproductorAutorizado();
+    $codigo = strip_tags(trim($_GET['c']));
+    $autorizado = $ra->autorizado($codigo, $_SESSION['dni']);
+   
+    //Si el usuario no está autorizado vuelve al menu principal.
+    if($autorizado == false) {
+        header("Location: index.php?mensaje=".urlencode("Usuario no autorizado para reproducir este vídeo."));
+        exit;
+    }
+
+    
     // Vídeo a descargar
     $video = "";
     if (isset($_POST["codigo"])) {

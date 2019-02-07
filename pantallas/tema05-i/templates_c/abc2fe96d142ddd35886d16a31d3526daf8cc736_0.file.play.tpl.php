@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-07 20:49:46
+/* Smarty version 3.1.33, created on 2019-02-07 23:49:17
   from 'C:\UwAmp\pantallas\tema05-i\templates\play.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c5c8bdac7af20_72942650',
+  'unifunc' => 'content_5c5cb5ed91fb69_72385640',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'abc2fe96d142ddd35886d16a31d3526daf8cc736' => 
     array (
       0 => 'C:\\UwAmp\\pantallas\\tema05-i\\templates\\play.tpl',
-      1 => 1549562058,
+      1 => 1549579742,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c5c8bdac7af20_72942650 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c5cb5ed91fb69_72385640 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -187,7 +187,8 @@ function content_5c5c8bdac7af20_72942650 (Smarty_Internal_Template $_smarty_tpl)
             </button>
             <?php if ($_smarty_tpl->tpl_vars['datosVideoS']->value['descargable'] == 'S') {?>
                 <div class="descargar">
-                    <form action="descargar.php" method="post">
+                    <form action="descargar.php?c=<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['codigo'];?>
+" method="post">
                         <input type="hidden" name="codigo" value="<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['video'];?>
 ">
                         <input type="hidden" name="titulo" value="<?php echo $_smarty_tpl->tpl_vars['datosVideoS']->value['titulo'];?>

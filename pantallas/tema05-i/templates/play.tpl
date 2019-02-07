@@ -158,7 +158,7 @@
             </button>
             {if $datosVideoS.descargable == 'S'}
                 <div class="descargar">
-                    <form action="descargar.php" method="post">
+                    <form action="descargar.php?c={$datosVideoS.codigo}" method="post">
                         <input type="hidden" name="codigo" value="{$datosVideoS.video}">
                         <input type="hidden" name="titulo" value="{$datosVideoS.titulo}">
                         <input type="submit" name="descargar" value="Descargar">
