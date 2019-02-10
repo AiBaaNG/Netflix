@@ -5,6 +5,7 @@
     require_once("../../seguridad/tema05-i/Pantalla.class.php");
     require_once("../../seguridad/tema05-i/Sesion.class.php");
     require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
+    require_once("../../seguridad/tema05-i/openssl_encrypt_decrypt.class.php");
     
     
     
@@ -51,7 +52,13 @@
     //Reproducir video
     //Cojo los datos del video para posteriormente mostrarlos y poder reproducirlo.
     $datosVideo = $videos->getDatosV($codigo);
+
+    //Encripto la ruta
+    $ruta = encrypt::encrypt_decrypt('encrypt', $datosVideo["video"]);
+
+
     // TODO: Funcion por hacer
+    $smarty->assign('ruta', $ruta);
     $smarty->assign('datosVideoS', $datosVideo);
     $smarty->display('play.tpl');
     

@@ -3,6 +3,7 @@
     require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
     require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
     require_once("../../seguridad/tema05-i/Sesion.class.php");
+    require_once("../../seguridad/tema05-i/openssl_encrypt_decrypt.class.php");
     $enlace = strip_tags(trim($_GET['v']));
     $codigo = strip_tags(trim($_GET['c']));
 
@@ -28,6 +29,9 @@
     $bd->marcarVisto($_SESSION['dni'],$codigo);
    
     //Cojo el enlace que me envian por GET y lo añado a la ruta en la que están mis videos.
+
+    //Desencripto la ruta
+    $enlace = encrypt::encrypt_decrypt('decrypt', $enlace);
 
     $ruta_video = '../../videos/videos/' . $enlace;
 

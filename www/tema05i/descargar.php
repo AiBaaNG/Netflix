@@ -5,6 +5,7 @@ require_once("../../seguridad/tema05-i/AccesoVideos.class.php");
 require_once("../../seguridad/tema05-i/Pantalla.class.php");
 require_once("../../seguridad/tema05-i/Sesion.class.php");
 require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
+require_once("../../seguridad/tema05-i/openssl_encrypt_decrypt.class.php");
 
     //Compruebo si la sesion ha sido creada, para si no es así el usuariio no estará logueado
     Sesion::start();
@@ -29,6 +30,9 @@ require_once("../../seguridad/tema05-i/ReproductorAutorizado.class.php");
     if (isset($_POST["codigo"])) {
         $video = $_POST["codigo"];
     }
+    //Desencripto la ruta
+    $video = encrypt::encrypt_decrypt('decrypt', $video);
+
     $titulo = "";
     if (isset($_POST["titulo"])) {
         $titulo = $_POST["titulo"];

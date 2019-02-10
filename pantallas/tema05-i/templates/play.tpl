@@ -154,12 +154,12 @@
         <img src="carteles/{$datosVideoS.cartel}" alt="{$datosVideoS.titulo}" width="200px;" id="imagen">
             <p id="sinopsis">{$datosVideoS.sinopsis}</p>
             <button>
-                <a href="player.php?v={$datosVideoS.video}&c={$datosVideoS.codigo}">Ver Película</a>
+                <a href="player.php?v={$ruta}&c={$datosVideoS.codigo}">Ver Película</a>
             </button>
             {if $datosVideoS.descargable == 'S'}
                 <div class="descargar">
                     <form action="descargar.php?c={$datosVideoS.codigo}" method="post">
-                        <input type="hidden" name="codigo" value="{$datosVideoS.video}">
+                        <input type="hidden" name="codigo" value="{$ruta}">
                         <input type="hidden" name="titulo" value="{$datosVideoS.titulo}">
                         <input type="submit" name="descargar" value="Descargar">
                     </form>
